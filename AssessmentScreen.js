@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import {SectionList, Pressable, Button, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {SectionList, Pressable, Button, StyleSheet, Text, View, TouchableOpacity, Alert} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { sectionListData } from './SectionListData'; 
+import LevelMap from './LevelMap';
 
 const FinishAssessmentButton = ({title, onPress}) => {
   return(
@@ -12,7 +13,7 @@ const FinishAssessmentButton = ({title, onPress}) => {
 };
 
 let answerArr = [];
-let correctAnser;
+let correctAnswer = 0;
 
 
 const MyCheckbox = ({index, sectionIndex}) =>{
@@ -52,7 +53,7 @@ const MyCheckbox = ({index, sectionIndex}) =>{
       if(sectionIndex === 10 && index === 2){
         answerArr[sectionIndex] = !checked
       }
-      if(sectionIndex === 11 && index === 3){
+      if(sectionIndex === 11 && index === 0){
         answerArr[sectionIndex] = !checked
       }
       if(sectionIndex === 12 && index === 1){
@@ -74,6 +75,57 @@ const MyCheckbox = ({index, sectionIndex}) =>{
    
   );
 }
+
+const SectionListBasics = ({ navigation }) => {
+  const Finish = () => {
+    for(let i = 0; i < answerArr.length + 1; i++){
+      if(answerArr[i] === true){
+        correctAnswer++
+      }
+    }
+    if(correctAnswer < 4){
+      Alert.alert("Congratulation", "You are a Newbie. You may start at the Newbie Level");
+    }
+    else if(correctAnswer < 7){
+      Alert.alert("Congratulation", "You are a Novice. You may start at the Novice Level");
+    }
+    else if(correctAnswer < 10){
+      Alert.alert("Congratulation", "You are a Intermediate Cook. You may start at the Mid-Tier Level");
+    }
+    else if(correctAnswer < 13){
+      Alert.alert("Congratulation", "You are a Advance Cook. You may start at the Advance Level");
+    }
+    else{
+      Alert.alert("Congratulation", "You are a Expert Cook. You may start at the Expert Level");
+    }
+    navigation.navigate('LevelMap')
+  }
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.appTitle}>Select the box with the correct answer:</Text>
+      <SectionList
+        sections={sectionListData}
+        renderSectionHeader={({section}) => (
+          <Text style={styles.sectionHeader}>{section.title}</Text>
+        )}
+        renderItem={({item, index, section}) => <View style={styles.checkboxContainer}>
+          <MyCheckbox index={index} sectionIndex={section.index}/>
+          <Text style={styles.item}>{item}</Text>
+          </View>}
+
+        keyExtractor={item => `basicListEntry-${item}`}
+      />
+
+      <FinishAssessmentButton 
+        title = "Finish"
+        onPress={() => Finish()}
+      />  
+    
+    </View>
+  );
+};
+
 const styles = StyleSheet.create({
   container: {
     flex: 2,
@@ -140,43 +192,5 @@ const styles = StyleSheet.create({
   },
 
 });
-
-
-const SectionListBasics = ({ navigation }) => {
-  const Finish = () => {
-    for(let i = 0; i < answerArr.length; i++){
-      if(answerArr[i] === true){
-        correctAnser++
-      }
-    }
-    alert(correctAnser)
-    //navigation.navigate('LevelMap')
-  }
-
-  return (
-    <View style={styles.container}>
-      <Text style={styles.appTitle}>Select the box with the correct answer:</Text>
-      <SectionList
-        sections={sectionListData}
-        renderSectionHeader={({section}) => (
-          <Text style={styles.sectionHeader}>{section.title}</Text>
-        )}
-        renderItem={({item, index, section}) => <View style={styles.checkboxContainer}>
-          <MyCheckbox index={index} sectionIndex={section.index}/>
-          <Text style={styles.item}>{item}</Text>
-          </View>}
-
-        keyExtractor={item => `basicListEntry-${item}`}
-      />
-
-      <FinishAssessmentButton 
-        title = "Finish"
-        onPress={() => Finish()}
-      />  
-    
-    </View>
-  );
-};
-
 
 export default SectionListBasics;
