@@ -3,6 +3,7 @@ import {SectionList, Pressable, Button, StyleSheet, Text, View, TouchableOpacity
 import { Ionicons } from '@expo/vector-icons';
 import { sectionListData } from './SectionListData'; 
 import LevelMap from './LevelMap';
+import { test } from './LevelMap';
 
 const FinishAssessmentButton = ({title, onPress}) => {
   return(
@@ -18,6 +19,7 @@ let correctAnswer = 0;
 
 const MyCheckbox = ({index, sectionIndex}) =>{
   const [checked, setChecked] = useState(false);
+
   function pressHandle(){
       setChecked(!checked)
       if(sectionIndex === 0 && index === 2){
@@ -66,6 +68,7 @@ const MyCheckbox = ({index, sectionIndex}) =>{
         answerArr[sectionIndex] = !checked
       }
   }
+  
   return (
     <Pressable
       style={[styles.checkboxBase, checked && styles.checkboxChecked]}
@@ -78,7 +81,7 @@ const MyCheckbox = ({index, sectionIndex}) =>{
 
 const SectionListBasics = ({ navigation }) => {
   const Finish = () => {
-    for(let i = 0; i < answerArr.length + 1; i++){
+    for(let i = 0; i < answerArr.length; i++){
       if(answerArr[i] === true){
         correctAnswer++
       }
@@ -104,7 +107,8 @@ const SectionListBasics = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.appTitle}>Select the box with the correct answer:</Text>
-      <SectionList
+      <SectionList 
+        stickySectionHeadersEnabled = {false}
         sections={sectionListData}
         renderSectionHeader={({section}) => (
           <Text style={styles.sectionHeader}>{section.title}</Text>
