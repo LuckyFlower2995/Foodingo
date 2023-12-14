@@ -377,11 +377,23 @@ const styles = StyleSheet.create({
     },
     pointsContainer: {
         position: 'absolute',
+        top: 55,
+        right: 10,
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        padding: 3,
+        borderRadius: 5,
+        zIndex: 1, 
+    },
+    pointsText: {
+        color: 'white',
+        fontSize: 15,
+
         top: 100,
         right: 10,
     },
     pointsText: {
         fontSize: 24,
+
     },
 });
 
