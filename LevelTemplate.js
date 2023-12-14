@@ -34,7 +34,7 @@ export default function LevelTemplate( {route, navigation} ) {
       navigation.navigate('MiniQuiz' , {level: route.params.level, param: true})
     }
     else[
-      navigation.navigate('MiniQuiz' , {param: false})
+      navigation.navigate('MiniQuiz' , {level: route.params.level, param: false})
     ]
   }
   
@@ -101,5 +101,5 @@ export default function LevelTemplate( {route, navigation} ) {
     ({ title, titleStyle, titleNumberOfLines, titleVariant, titleMaxFontSizeMultiplier, subtitle, subtitleStyle, subtitleNumberOfLines, subtitleVariant, subtitleMaxFontSizeMultiplier, left, leftStyle, right, rightStyle, style, theme: themeOverrides, }: Props): React.JSX.Element;
     displayName: string;
 }
-
+*/
 
