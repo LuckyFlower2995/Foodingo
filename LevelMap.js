@@ -55,7 +55,7 @@ const LevelMap = ({route, navigation}) => {
                 navigation.navigate("Recipes", {level: level, param: true})
             }
             else{
-                navigation.navigate("Recipes", {param: false})
+                navigation.navigate("Recipes", {level: index, param: false})
             }
        }
        else{
@@ -117,4 +117,6 @@ const LevelMap = ({route, navigation}) => {
 
     );
 };
+
+export default LevelMap;
 
