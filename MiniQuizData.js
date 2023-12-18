@@ -3,18 +3,18 @@ export const quizQuestions = [
       level: 1,
       questions: [
           {
-              question: 'Question 1: What is an ingredient that is NOT required in a BLT Sandwich?',
-              answers: ['lettuce', 'cheese', 'tomato', 'bacon'],
+              question: 'Question 1: Why should you season food before cooking?',
+              answers: ['roasts the spices', 'draws out water and concentrates flavor', 'adds moisture', 'salty food tastes better'],
               correctAnswer: 1,
           },
           {
-              question: 'Question 2: What equipment is used in making a BLT sandwich?',
-              answers: ['frying pan', 'wok', 'pot', 'kettle'],
+              question: 'Question 2: What does heat do to certain produce?',
+              answers: ['softens it', 'hardens it', 'freezes it', 'burns it'],
               correctAnswer: 0,
           },
           {
-              question: 'Question 3: How long does it roughly take to make a BLT sandwich?',
-              answers: ['15 minutes', '30 minutes', '45 minutes', '60 minutes'],
+              question: 'Question 3: How long does it roughly take to boil water on high heat?',
+              answers: ['2 minutes', '15 minutes', '5-10 minutes', '60 minutes'],
               correctAnswer: 2,
           },
       ],
@@ -28,12 +28,12 @@ export const quizQuestions = [
               correctAnswer: 3,
           },
           {
-              question: 'Question 2: In what order of ingredients do you cover the string cheese sticks on?',
+              question: 'Question 2: In what order of ingredients do you coat fried foods in?',
               answers: ['bread crumbs -> egg wash -> flour', 'flour -> egg wash -> bread crumbs', 'egg wash -> bread crumbs -> flour', 'flour -> bread crumbs -> egg wash'],
               correctAnswer: 1,
           },
           {
-              question: 'Question 3: How long does it take to fully fry a battered string cheese stick?',
+              question: 'Question 3: How long does it take to fully fry battered cheese or vegetable',
               answers: ['10 seconds', '20 seconds', '40 seconds', '1 minute'],
               correctAnswer: 2,
           },
