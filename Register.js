@@ -1,15 +1,38 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View, TextInput, TouchableOpacity, Image, ImageBackground } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'; 
+// import axios from 'axios';
 
 const loginlogoImage = require('./assets/images/DingoLogo.jpg');
 const registerBackground = require('./assets/images/signupBackground.png');
 
 const RegisterPage = ({navigation}) => {
+    const [username, setUsername] = useState('');
+    // const [email, setEmail] = useState('');
+    // const [password, setPassword] = useState('');
+
+    // const [isSubmit, setIsSubmit] = useState(false);
+    
+
+    // useEffect(() => {
+    //     const authenticate = async () => {
+    //         axios.post()
+    //     }
+    // })
+    // const usernameHandler = (text) => {
+    //     setEmail(text);
+    // }
+
+    // const passwordHandler = (text) => {
+    //     setPassword(text);
+    // }
+
+    
     const [state, setState] = useState({
         email: '',
         password: '',
-    })
+});
+// }
     const onPressRegister = () => {
         //handle log in pressed
         console.log("Register Pressed");
@@ -31,12 +54,14 @@ const RegisterPage = ({navigation}) => {
         <View style={styles.inputView}>
             <TextInput style={styles.inputText}
             placeholder='Email'
+            onChangeText={(text) => setEmail(text)}
             placeholderTextColor={"#003f5c"}
             />
         </View>
         <View style={styles.inputView}>
             <TextInput style={styles.inputText}
             placeholder='Password'
+            onChangeText={(text) => setPassword(text)}
             placeholderTextColor={"#003f5c"}
             />
         </View>

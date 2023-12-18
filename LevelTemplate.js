@@ -17,7 +17,7 @@ const FinishRecipeButton = ({title, onPress}) => {
 export default function LevelTemplate( {route, navigation} ) {
   const [meals, setMeals] = useState([]);
   const  [searchQuery, setSearchQuery] = useState('');
-  const url ="https://www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata";
+  const url ="https://www.themealdb.com/api/json/v1/1/random.php";
   const getMeals = async () =>{
   const response = await fetch(url);
   const data = await response.json();
