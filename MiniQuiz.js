@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import * as React from 'react';
-import {SafeAreaView, Pressable, Text, View, ImageBackground} from 'react-native';
+import {SafeAreaView, Pressable, Text, View, ImageBackground } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { quizQuestions } from './MiniQuizData'; 
 import styles from "./styles";
+import { ScrollView } from 'react-native-gesture-handler';
 
 const BackgroundImage = require('./assets/images/StartingBG.jpg');
 
@@ -50,7 +51,7 @@ const MiniQuiz= ({route}) => {
         else{
             navigation.navigate('LevelMap')
         }
-    }
+    };
 
     return (
         <ImageBackground source={BackgroundImage} style={styles.miniContainer}>
@@ -59,7 +60,7 @@ const MiniQuiz= ({route}) => {
                 <Text style={styles.miniAppTitle}>( {index + 1} / 3 )</Text>
                 <Text style={styles.miniAppTitle}>Select the box with the correct answer:</Text>
             </View>
-
+            <ScrollView>
             <View>
                 {currentLevelData.questions.length + 1 > 0 && (
                     <View>
@@ -94,6 +95,7 @@ const MiniQuiz= ({route}) => {
                     </View> 
                 )}
             </View>
+            </ScrollView>
 
         <View>
             

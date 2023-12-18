@@ -52,13 +52,15 @@ const styles = StyleSheet.create({
     },
     homeButtonText: { //used in both Home Screen, Assessment, and Level Template
         textTransform: 'uppercase',
+        marginStart: 20,
+        
         color: '#f04713',
         fontFamily: 'Avenir',
         fontWeight: 'bold',
         letterSpacing: 3,
         fontSize: 20,
         textDecorationLine: 'none', 
-        marginLeft: 10,
+        
     },
     
     //in Assessment Screen
@@ -255,6 +257,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(247,247,247,0.1)',
     },
     answerContainer: {
+        flex: 1,
         margin: 30,
         paddingTop: 20,
         paddingBottom: 20,
@@ -273,6 +276,7 @@ const styles = StyleSheet.create({
         padding: 16,
     },
     miniButton: {
+        marrgiTop: 20,
         margin: 70,
         paddingTop: 10,
         paddingBottom: 10,
@@ -283,6 +287,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(255 255 255/ 0.5)',
     },
     miniButtonText: {
+        
         textTransform: 'uppercase',
         color: '#f04713',
         fontFamily: 'Avenir',

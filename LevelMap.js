@@ -1,6 +1,6 @@
 
 import {React, useRef, useState, useEffect} from "react";
-import {View, Text, ImageBackground, Image, ScrollView, TouchableOpacity, Button} from "react-native";
+import {View, Text, ImageBackground, ScrollView, TouchableOpacity} from "react-native";
 import PointsDisplay from "./PointsDisplay";
 import styles from "./styles";
 
@@ -8,13 +8,13 @@ import styles from "./styles";
 // Foodingo/assets/images/levelMapBackground.png
 const levelBackGround = require('./assets/images/levelMapBackground.png');
 
-const ScrollToLevelButton = ({title, onPress}) => {
-    return(
-        <TouchableOpacity style={styles.scrollToLevelButton} onPress={onPress}>
-             <Text style ={styles.scrollToLevelButtonText}> {title} </Text>
-        </TouchableOpacity>
-    );
-  };
+// const ScrollToLevelButton = ({title, onPress}) => {
+//     return(
+//         <TouchableOpacity style={styles.scrollToLevelButton} onPress={onPress} web-kit-overscrolling={Touch}>
+//              <Text style ={styles.scrollToLevelButtonText}> {title} </Text>
+//         </TouchableOpacity>
+//     );
+//   };
 
 
 const LevelNode = ({level, onPress}) => (
@@ -35,7 +35,7 @@ const LevelNode2 = ({level, onPress}) => (
 
 const LevelMap = ({route, navigation}) => {
     const numLevels = 20;
-    ref = useRef(null);
+    
 
     const [level, setLevel] = useState(0);
     const [points, setPoints] = useState(0); 
@@ -99,17 +99,19 @@ const LevelMap = ({route, navigation}) => {
         // </ScrollView>
         <View style={{ flex: 1 }}>
         <ImageBackground source={levelBackGround} style={styles.background}>
-            <ScrollView ref={ref} style={{ flex: 1 }}>
-                <View style={{ backgroundColor: 'white', marginBottom: 10, marginTop: 10, paddingHorizontal: 16 }}>
+            <ScrollView  style={{ flex: 1 }}>
+                {/* <View style={{ backgroundColor: 'white', marginBottom: 10, marginTop: 10, paddingHorizontal: 16 }}>
                     <ScrollToLevelButton title="Go To Latest Level" onPress={() => ScrollHandler()} />
-                </View>
+                </View> */}
                 <View style={styles.LevelMapContainer} >
                     {levelNodeArr}
                 </View>
+                
             </ScrollView>
             <View style={styles.pointsContainer}>
                 <PointsDisplay key={points} points={points} />
             </View>
+            
         </ImageBackground>
     </View>
 
