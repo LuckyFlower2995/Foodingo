@@ -94,7 +94,8 @@ const styles = StyleSheet.create({
     logInLogo: {
         width: 100,
         height: 100, 
-        marginLeft: 160,
+        marginLeft: 210,
+        marginBottom: 25,
         borderRadius: 150,
         marginTop: 20,
     },
