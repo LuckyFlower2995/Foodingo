@@ -20,6 +20,8 @@ let isChecked = [];
 const MyCheckbox = ({index, sectionIndex}) =>{
   const [checked, setChecked] = useState(false);
 
+
+  
   function pressHandle(){
     switch(sectionIndex){
       case 0:
