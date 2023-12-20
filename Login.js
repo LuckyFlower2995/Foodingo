@@ -2,42 +2,76 @@ import React, {useState} from 'react';
 import {StyleSheet, Text, View, TextInput, TouchableOpacity, Image, ImageBackground } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'; 
 import Colors from './Shared/Colors';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { FIREBASE_AUTH, auth } from './firebase';
+import { ActivityIndicator } from 'react-native-paper';
+// import { KeyboardAvoidingView } from 'react-native-web';
 
 const loginlogoImage = require('./assets/images/DingoLogo.jpg');
 
 
 const LoginPage = ({navigation}) => {
-    const [state, setState] = useState({
-        email: '',
-        password: '',
-    })
-    const onPressLogin = () => {
-        //handle log in pressed
-        console.log("Login Pressed");
-        navigation.navigate('Home')
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    // const [loading, setLoading] = useState(false);
+    const auth = FIREBASE_AUTH;
+
+    const onPressLogin = async () => {
+        // setLoading(true);
+        try {
+            const response = await signInWithEmailAndPassword(auth, email, password);
+            console.log(response);
+        } catch (error) {
+            console.log(error);
+            alert('Login failed ' + error.message);
+        } finally {
+            // setLoading(false);
+            navigation.navigate('Home');
+
+        }
+        
+        // auth
+        // .createUserWithEmailAndPassword(email, password)
+        // .then(userCredentials => {
+        //     const user = userCredentials.user;
+        //     console.log('Logged in with:', user.email);
+        //     navigation.navigate('Home')
+        // })
+        // .catch(error => alert(error.message))
     }
+
     const onPressForgotPassword = () => {
         //handle forgot password pressed
         console.log("Forgot Password Pressed");
-        navigation.navigate('ResetPassword') //Create 'Reset Password Page'
+        navigation.navigate('ResetPassword') 
     }
 
-    const onPressSignUp = () => {
+    const onPressSignUp =  () => {
+
+        navigation.navigate('Register'); 
+    
+
         //handle sign up 
-        console.log("Register Pressed");
-        navigation.navigate('Register') //Create 'Sign Up Page'
-    }
+        // console.log("Register Pressed");
+        // navigation.navigate('Register') 
+    };
 
     return (
     <ImageBackground
     source = {require('./assets/images/loginBackground.png')}
-    style={styles.backgroundImage}
-    >
+    style={styles.backgroundImage}>
+
     <Image source={loginlogoImage} style={styles.logInLogo}/>
     
     <View style={styles.logIncontainer}> 
+       
         <Text style={styles.loginHeader}> Welcome </Text>
-
+    
+        {/* {loading ? (
+        <ActivityIndicator size="large" color='#0000ff'/>
+        ) : (
+            
+        <> */}
         <TouchableOpacity
             onPress = {onPressSignUp}>
             <Text style={styles.forgotSignUpText}>
@@ -48,24 +82,31 @@ const LoginPage = ({navigation}) => {
         <View style={styles.inputView}>
             <TextInput style={styles.inputText}
             placeholder='Email'
+            value={email}
+            onChangeText={text => setEmail(text)}
             placeholderTextColor={"#003f5c"}
             />
         </View>
         <View style={styles.inputView}>
             <TextInput style={styles.inputText}
+            secureTextEntry={true}
             placeholder='Password'
+            value={password}
+            onChangeText={text => setPassword(text)}
             placeholderTextColor={"#003f5c"}
             />
-        </View>
+            { loading ? <ActivityIndicator size="large" color='#0000ff'/> 
+            : null }
+                    
+            </View>
 
         <TouchableOpacity
-        onPress={onPressLogin}
-        style={styles.loginButton}>
-            <Text style={styles.loginText}>
-                Login
-            </Text>
-
+            onPress={onPressLogin}
+            style={styles.loginButton}>
+            <Text style={styles.loginText}> Login </Text>
         </TouchableOpacity>
+        {/* </>
+        )} */}
 
         <TouchableOpacity
             onPress = {onPressForgotPassword}>
@@ -76,8 +117,9 @@ const LoginPage = ({navigation}) => {
         <View style={styles.googleButton}>
         <Ionicons name="logo-google" size={24} color="white" />
         <Text style={{color:Colors.secondary, marginTop: 3, marginLeft: 2}}> Sign In with Google </Text>
-       
-        </View>
+            
+    </View>
+        
     </View>
     </ImageBackground>
     )

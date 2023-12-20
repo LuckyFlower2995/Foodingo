@@ -1,19 +1,36 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import HomeScreen from './HomeScreen';
 import AssessmentScreen from './AssessmentScreen';
 import MiniQuiz from './MiniQuiz';
-import DifficultySelection from './DifficultySelection'
-import LevelMap from './LevelMap';
+// import DifficultySelection from './DifficultySelection'
+// import LevelMap from './LevelMap';
 import RegisterPage from './Register'
+import LoginPage from './Login'
+import { FIREBASE_AUTH, auth } from './firebase';
+// import { FIREBASE_APP } from './firebase';
+// import { initializeApp } from 'firebase/app';
+// import { initializeAuth, getReactNativePersistence } from 'firebase/auth';
+// import { getFirestore } from "firebase/firestore";
+// import { getAuth } from "firebase/auth";
+
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import NavContainer from './NavBarContainer';
 import LevelTemplate from './LevelTemplate';
-import LoginPage from './Login';
+// import LoginPage from './Login';
 
 export default function App() {
-
+  const [user, setUser] = React.useState(null);
   const Stack = createNativeStackNavigator();
+
+  useEffect(() => {
+    auth.onAuthStateChanged(FIREBASE_AUTH, (user) => {
+      console.log('user', user);
+        setUser(user);
+      });
+    }, []);
+
+  
   
   return (
     <NavigationContainer>

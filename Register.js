@@ -1,43 +1,35 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View, TextInput, TouchableOpacity, Image, ImageBackground } from 'react-native';
-import { Ionicons } from '@expo/vector-icons'; 
+// import { Ionicons } from '@expo/vector-icons';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+// import { initializeApp } from 'firebase/app';
+// import { initializeAuth, getReactNativePersistence } from 'firebase/auth';
+import { auth } from './firebase';
 // import axios from 'axios';
 
 const loginlogoImage = require('./assets/images/DingoLogo.jpg');
 const registerBackground = require('./assets/images/signupBackground.png');
 
 const RegisterPage = ({navigation}) => {
-    const [username, setUsername] = useState('');
-    // const [email, setEmail] = useState('');
-    // const [password, setPassword] = useState('');
-
-    // const [isSubmit, setIsSubmit] = useState(false);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const auth = FIREBASE_AUTH;
     
 
-    // useEffect(() => {
-    //     const authenticate = async () => {
-    //         axios.post()
-    //     }
-    // })
-    // const usernameHandler = (text) => {
-    //     setEmail(text);
-    // }
-
-    // const passwordHandler = (text) => {
-    //     setPassword(text);
-    // }
-
-    
-    const [state, setState] = useState({
-        email: '',
-        password: '',
-});
-// }
-    const onPressRegister = () => {
-        //handle log in pressed
-        console.log("Register Pressed");
-        navigation.navigate('Login')
+    const onHandleSignUp = async () => {
+        // setLoading(true);
+        try {
+            const response = await createUserWithEmailAndPassword(auth, email, password);
+            console.log(response);
+        } catch (error) {
+            console.log(error);
+            alert('Registration failed: ' + error.message);
+        } finally {
+            // setLoading(false);
+            navigation.navigate('Home'); 
+        }
     }
+    
     return (
         <ImageBackground
         source = {registerBackground}
@@ -50,7 +42,12 @@ const RegisterPage = ({navigation}) => {
         <Text style={styles.registerHeader}> Create </Text>
         <Text style={styles.registerHeader}> New Account </Text>
 
+        {/* {loading ? (
+        <ActivityIndicator size="large" color='#0000ff'/>
+        ) : (
 
+        <> */}
+            
         <View style={styles.inputView}>
             <TextInput style={styles.inputText}
             placeholder='Email'
@@ -67,16 +64,18 @@ const RegisterPage = ({navigation}) => {
         </View>
 
         <TouchableOpacity
-        onPress={onPressRegister}
+        onPress={onHandleSignUp}
         style={styles.registerButton}>
             <Text style={styles.registerText}>
                 Create Account
             </Text>
 
         </TouchableOpacity>
+        {/* </>
+        )} */}
     </View>
     </ImageBackground>
-
+    
     )
 }
 
