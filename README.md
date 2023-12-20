@@ -9,8 +9,10 @@ How to Install and Run:
 First, git clone the Foodingo repository.
 Before running Foodingo, the Expo Go app must be installed on your device and the following dependencies must be installed onto your terminal:
 @expo/webpack-config
+@react-native-async-storage/async-storage
 @react-native-community/masked-view
 @react-native-firebase/app
+@react-native-firebase/auth
 @react-navigation/bottom-tabs
 @react-navigation/native
 @react-navigation/native-stack,
